@@ -36,9 +36,15 @@ public class BookController {
 	}
 	
 	@GetMapping(value = "delete/{id}")
-	public String handleDelete(@PathVariable("id") Long id) {
-		repository.deleteById(id);
+	public String handleDelete(@PathVariable("id") Long bookId) {
+		repository.deleteById(bookId);
 		return "redirect:../booklist";
+	}
+	
+	@GetMapping(value = "/edit/{id}")
+	public String handleEdit(@PathVariable("id") Long bookId, Model model) {
+		model.addAttribute("book", repository.findById(bookId));
+		return "editbook";
 	}
 	
 }

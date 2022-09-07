@@ -19,7 +19,7 @@ public class Book {
 	
 	public Book() {}
 	
-	public Book(String isbn, String title, String author, int bookYear, double price) {
+	public Book(String author, String title, String isbn, int bookYear, double price) {
 		super();
 		this.author = author;
 		this.title = title;
@@ -30,6 +30,10 @@ public class Book {
 	
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getIsbn() {
