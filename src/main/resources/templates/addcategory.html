@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>New category</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	</head>
+	
+	<body>
+		<div class="container">
+			<h1 class="display-3 text-center">New category</h1>
+			<form th:object=${category} th:action="@{saveCategory}" action="#" method="POST">
+				<div class="mb-3">
+					<label for="categoryname" class="form-label">Name </label>
+					<input type=text id="categoryname" th:field="*{categoryname}" class="form-control"/>
+					<span th:if="${#fields.hasErrors('categoryname')}" th:errors="*{categoryname}">cat error</span>
+				</div>
+    			<input type=submit value="Add" class="btn btn-primary"/>
+			</form>	
+		</div>
+	</body>
+</html>

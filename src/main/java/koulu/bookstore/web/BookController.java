@@ -1,16 +1,15 @@
 package koulu.bookstore.web;
 
-import java.util.List;
-import java.util.Optional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import koulu.bookstore.domain.Book;
 import koulu.bookstore.domain.BookRepository;
@@ -39,7 +38,12 @@ public class BookController {
 	}
 	
 	@PostMapping(value = "/save")
-	public String handleSave(Book book) {
+	public String handleSave(@Valid Book book, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("categories", crepository.findAll());
+			System.out.println("Validation error in handleSave");
+			return "addbook";
+		}
 		repository.save(book);
 		return "redirect:booklist";
 	}
@@ -55,17 +59,16 @@ public class BookController {
 		model.addAttribute("book", repository.findById(bookId));
 		model.addAttribute("categories", crepository.findAll());
 		return "editbook";
-	}	
-	
-	// REST SERVICES
-	
-	@GetMapping(value = "/books")
-	public @ResponseBody List<Book> handleGetRest() {
-		return (List<Book>) repository.findAll();
 	}
 	
-	@GetMapping(value = "/book/{id}")
-	public @ResponseBody Optional<Book> handleGetByID(@PathVariable("id") Long bookId) {
-		return repository.findById(bookId);
+	@PostMapping(value = "/saveEdit")
+	public String handleSaveEdit(@Valid Book book, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("categories", crepository.findAll());
+			System.out.println("Validation error in handleSaveEdit");
+			return "editbook";
+		}
+		repository.save(book);
+		return "redirect:booklist";
 	}
 }

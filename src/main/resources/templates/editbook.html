@@ -10,23 +10,27 @@
 	<body>
 		<div class="container">
 			<h1 class="display-3 text-center">Edit book</h1>
-			<form th:object=${book} th:action="@{../save}" action="#" method="POST">
+			<form th:object=${book} th:action="@{../saveEdit}" action="#" method="POST">
 				<input type="hidden" id="id" th:field="*{id}"/>
 				<div class="mb-3">
 					<label for="author" class="form-label">Author </label>
-					<input type=text id="author" th:field="*{author}" class="form-control"/>	
+					<input type=text id="author" th:field="*{author}" class="form-control"/>
+					<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
 				</div>
 				<div class="mb-3">
 					<label for="title" class="form-label">Title </label>
 					<input type=text id="title" th:field="*{title}" class="form-control"/>
+					<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 				</div>
 				<div class="mb-3">
 					<label for="isbn" class="form-label">ISBN </label>
 					<input type=text id="isbn" th:field="*{isbn}" class="form-control"/>
+					<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
 				</div>
 				<div class="mb-3">
 					<label for="bookYear" class="form-label">Year </label>
 					<input type=text id="bookYear" th:field="*{bookYear}" class="form-control"/>
+					<span th:if="${#fields.hasErrors('bookYear')}" th:errors="*{bookYear}"></span>
 				</div>
 				<div class="mb-3">
 					<label for="price" class="form-label">Price </label>
@@ -35,7 +39,7 @@
 				<div class="mb-3"> 	 				
 		  			<label for="categorylist">Category</label>
 			 		<select id="categorylist" th:field="*{category}" class="form-control">
-       					<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+       					<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.categoryname}"></option>
     				</select>
     			</div>
 				<input type=submit value="Save" class="btn btn-primary"/>

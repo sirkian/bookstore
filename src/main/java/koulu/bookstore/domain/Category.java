@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,7 +19,9 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long categoryid;
-	private String name;
+	
+	@Size(min = 1, max = 15)
+	private String categoryname; 
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
@@ -27,9 +30,9 @@ public class Category {
 	
 	public Category() {}
 
-	public Category(String name) {
+	public Category(String categoryname) {
 		super();
-		this.name = name;
+		this.categoryname = categoryname;
 	}
 
 	public Long getCategoryid() {
@@ -40,12 +43,12 @@ public class Category {
 		this.categoryid = categoryid;
 	}
 
-	public String getName() {
-		return name;
+	public String getCategoryname() {
+		return categoryname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
 	}
 
 	public List<Book> getBooks() {
@@ -58,7 +61,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [categoryid=" + categoryid + ", name=" + name + "]";
+		return "Category [categoryid=" + categoryid + ", name=" + categoryname + "]";
 	}
 	
 	
