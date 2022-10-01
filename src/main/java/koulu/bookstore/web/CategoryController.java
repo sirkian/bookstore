@@ -3,6 +3,7 @@ package koulu.bookstore.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,12 +26,14 @@ public class CategoryController {
 		return "categorylist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("addcategory")
 	public String addCategory(Model model) {
 		model.addAttribute("category", new Category());
 		return "addcategory";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("saveCategory")
 	public String saveCategory(@Valid Category category, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
@@ -41,6 +44,7 @@ public class CategoryController {
 		return "redirect:categorylist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping(value = "/deleteCategory/{id}")
 	public String deleteCategory(@PathVariable("id") Long categoryid) {
 		crepository.deleteById(categoryid);

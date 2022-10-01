@@ -3,6 +3,7 @@ package koulu.bookstore.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ public class BookController {
 		return "booklist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/add") 
 	public String handleAdd(Model model) {
 		model.addAttribute("book", new Book());
@@ -37,6 +39,7 @@ public class BookController {
 		return "addbook";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping(value = "/save")
 	public String handleSave(@Valid Book book, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -48,12 +51,14 @@ public class BookController {
 		return "redirect:booklist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping(value = "/delete/{id}")
 	public String handleDelete(@PathVariable("id") Long bookId) {
 		repository.deleteById(bookId);
 		return "redirect:../booklist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping(value = "/edit/{id}")
 	public String handleEdit(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", repository.findById(bookId));
@@ -61,6 +66,7 @@ public class BookController {
 		return "editbook";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping(value = "/saveEdit")
 	public String handleSaveEdit(@Valid Book book, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {

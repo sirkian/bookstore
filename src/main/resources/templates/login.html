@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+	<head>
+		<title>Bookstore login</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	</head>
+	
+	<body>
+		<div class="container d-flex justify-content-center">
+			<div>
+				<h1 class="display-3 mt-3 mb-5">Login to Bookstore</h1>
+	        	<form class="text-center" th:action="@{/login}" method="post">
+	            	<div> 
+	            		<input type="text" name="username" class="form-control mb-2 p-2" placeholder="Username"/> 
+	            	</div>
+	            	<div> 
+	            		<input type="password" name="password" class="form-control mb-2 p-2" placeholder="Password"/>
+	            	</div>
+	            	<span class="text-danger" th:if="${param.error}"> Invalid username and password. </span>
+	            	<div>
+	            		<input type="submit" value="Sign In" class="btn btn-primary mt-5 mb-5"/>
+	            	</div>
+	            	<p>Don't have an account? <a th:href="@{/signup}">Sign up.</a></p>
+	        	</form>
+        	</div>
+       </div>
+	</body>
+</html>
