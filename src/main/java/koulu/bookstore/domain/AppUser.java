@@ -11,12 +11,20 @@ import javax.validation.constraints.Size;
 public class AppUser {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long userid;
 	
 	@Size(min = 1, max = 20)
-	private String firstName, lastName, email;
+	@Column(name = "firstname")
+	private String firstName;
+	
+	@Size(min = 1, max = 20)
+	@Column(name = "lastname")
+	private String lastName;
+	
+	@Size(min = 1, max = 20)
+	private String email;
 	
 	@Column(name = "role", nullable = false)
 	private String role;

@@ -1,5 +1,6 @@
 package koulu.bookstore.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import javax.validation.constraints.Size;
 public class Book {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Size(min = 1, max = 20)
@@ -29,7 +30,9 @@ public class Book {
 	
 	@Min(value = 1800, message = "Min year is 1800!")
 	@Max(value = 2023, message = "Year cannot be in the future!")
+	@Column(name = "book_year")
 	private int bookYear;
+	
 	private double price;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

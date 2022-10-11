@@ -35,6 +35,7 @@ public class BookstoreApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+			/*
 			Category cat1 = new Category("Thriller");
 			catRepository.save(cat1);
 			Category cat2 = new Category("Novel");
@@ -49,5 +50,6 @@ public class BookstoreApplication implements CommandLineRunner {
 			
 			userRepository.save(new AppUser("Anssi", "Sirkiä", "admin@gmail.com", "ADMIN", "admin", "$2a$10$Xp67oEDHyODcnTzkIIp9z.SpmmpZg33mqZe/jvaSHMnpWtEQGov5e"));
 			userRepository.save(new AppUser("Kari", "Käyttäjä", "user@usermail.com", "USER", "user", "$2a$10$Rc25Yhstdcr9Ce3WcQFKLeHT3nN1Yr.ud6M0AywXA8Q1tidWcdvqy"));
+			*/
 	}
 }
